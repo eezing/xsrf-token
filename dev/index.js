@@ -3,19 +3,14 @@
 const createCookie = require('../src/create-cookie');
 const http = require('http');
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
 
-    createCookie()
-        .then(cookie => {
-            res.statusCode = 200;
-            res.setHeader('Set-Cookie', cookie);
-            res.setHeader('Content-Type', 'text/plain');
-            res.end('Hello World\n');
-        })
-        .catch(() => {
-            res.statusCode = 500;
-            res.end();
-        });
+    const cookie = await createCookie();
+
+    res.statusCode = 200;
+    res.setHeader('Set-Cookie', cookie);
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello World\n');
 });
 
 server.listen(process.env.PORT, (err) => {
