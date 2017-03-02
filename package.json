@@ -7,7 +7,9 @@
     "test": "jest && eslint ./src",
     "test:watch": "jest --watch",
     "dev": "PORT=3000 nodemon --harmony-async-await dev",
-    "build:lib": "./node_modules/.bin/babel src -d lib"
+    "build": "npm run clean && ./node_modules/.bin/babel src -d lib --ignore __tests__",
+    "clean": "rm -rf lib",
+    "prebuild": "npm run test"
   },
   "repository": {
     "type": "git",
