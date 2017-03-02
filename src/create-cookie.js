@@ -2,9 +2,17 @@
 
 const crypto = require('crypto');
 
-module.exports = (callback) => callback ? createCookie(callback) : asPromise();
+module.exports = (key, callback) => {
 
-function createCookie(callback) {
+    if (typeof callback === 'undefined' && typeof key === 'function') {
+        callback = key;
+        key = undefined;
+    }
+
+    return callback ? createCookie(key, callback) : asPromise(key);
+};
+
+function createCookie(key = 'xsrf-token', callback) {
 
     crypto.randomBytes(16, (err, buf) => {
 
@@ -13,17 +21,17 @@ function createCookie(callback) {
         }
 
         const token = buf.toString('hex');
-        const cookie = `xsrf-token=${token}`;
+        const cookie = `${key}=${token}`;
 
         callback(null, cookie);
     });
 }
 
-function asPromise() {
+function asPromise(key) {
 
     return new Promise((resolve, reject) => {
 
-        createCookie((err, cookie) => {
+        createCookie(key, (err, cookie) => {
 
             if (err) {
                 return reject(err);

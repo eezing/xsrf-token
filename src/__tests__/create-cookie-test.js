@@ -38,4 +38,22 @@ describe('create-cookie', () => {
             });
         });
     });
+
+    describe('given a custom key', () => {
+
+        it('should provide expected cookie string', (done) => {
+
+            createCookie('csrf-token').then(cookie => {
+
+                const split = cookie.split('=');
+                const key = split[0];
+                const value = split[1];
+
+                expect(key).toBe('csrf-token');
+                expect(value).toHaveLength(32);
+
+                done();
+            });
+        });
+    });
 });
