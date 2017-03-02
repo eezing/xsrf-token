@@ -1,0 +1,25 @@
+{
+  "name": "xsrf-token",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "PORT=3000 nodemon dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eezing/xsrf-token.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eezing/xsrf-token/issues"
+  },
+  "homepage": "https://github.com/eezing/xsrf-token#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "@rill/cookies": "^1.0.1"
+  }
+}
